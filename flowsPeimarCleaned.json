@@ -1,0 +1,225 @@
+[
+    {
+        "id": "301440521a50a05c",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "25cd7b9c6c8814da",
+        "type": "debug",
+        "z": "301440521a50a05c",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 560,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "fc5edb712fef43c5",
+        "type": "http request",
+        "z": "301440521a50a05c",
+        "name": "Api req",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "https://www.solaxcloud.com:9443/proxy/api/getRealtimeInfo.do?tokenId=XXXXXXXXXXXXXXXXXXXXXXX&sn=YYYYYYYYYY",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 340,
+        "y": 200,
+        "wires": [
+            [
+                "25cd7b9c6c8814da",
+                "fe88c45d8168691a",
+                "ec02ff85fe4ab4a2"
+            ]
+        ]
+    },
+    {
+        "id": "cf34ab568a46a2e2",
+        "type": "inject",
+        "z": "301440521a50a05c",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 120,
+        "y": 80,
+        "wires": [
+            [
+                "fc5edb712fef43c5"
+            ]
+        ]
+    },
+    {
+        "id": "fe88c45d8168691a",
+        "type": "function",
+        "z": "301440521a50a05c",
+        "name": "function 1",
+        "func": "var msgAll = { payload: msg.payload };\nvar msg0 = { payload: msg.payload.result.powerdc1 };\nvar msg1 = { payload: msg.payload.result.powerdc2 };\nvar msg2 = { payload: msg0.payload + msg1.payload };\nreturn [msg0, msg1, msg2];",
+        "outputs": 3,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 560,
+        "y": 240,
+        "wires": [
+            [],
+            [],
+            [
+                "bcdb9b40378b14df",
+                "2e74c7bcd378283c"
+            ]
+        ]
+    },
+    {
+        "id": "2e74c7bcd378283c",
+        "type": "debug",
+        "z": "301440521a50a05c",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 800,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "cb74854b2e1bf595",
+        "type": "ui_button",
+        "z": "301440521a50a05c",
+        "name": "Check",
+        "group": "f49eec49ac63fa32",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Check (press to update)",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "date",
+        "topic": "payload",
+        "topicType": "msg",
+        "x": 90,
+        "y": 220,
+        "wires": [
+            [
+                "fc5edb712fef43c5"
+            ]
+        ]
+    },
+    {
+        "id": "ec02ff85fe4ab4a2",
+        "type": "ui_gauge",
+        "z": "301440521a50a05c",
+        "name": "Battery",
+        "group": "f49eec49ac63fa32",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "wave",
+        "title": "Battery Charge",
+        "label": "%",
+        "format": "{{msg.payload.result.soc}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#b04803",
+            "#e6e600",
+            "#3acb4a"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 680,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "bcdb9b40378b14df",
+        "type": "ui_gauge",
+        "z": "301440521a50a05c",
+        "name": "Power",
+        "group": "f49eec49ac63fa32",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Solar Production",
+        "label": "W",
+        "format": "{{msg.payload}}",
+        "min": 0,
+        "max": "6600",
+        "colors": [
+            "#b30c00",
+            "#e6e600",
+            "#65cb3a"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 910,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "f49eec49ac63fa32",
+        "type": "ui_group",
+        "name": "Panels",
+        "tab": "44a16943e112dcab",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "44a16943e112dcab",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
