@@ -1,5 +1,5 @@
 # PeimarNodeRED
-A very useful flow with API request guide
+A very useful NodeRED flow with API request guide for Peimar Inverters
 
 To use this flow you have to substitute the 23 "X" in the API request (you can do directly in the .json file or later in the NodeRED panel) with your API key that you will retrieve by entering with your Peimar Xportal credentials in Solax (the real inverter chinese producer) monitoring system, in the left menu you will see "request API key" option.
 
