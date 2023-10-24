@@ -6,4 +6,4 @@ To use this flow you have to substitute the 23 "X" in the API request (you can d
 Then substitute the 10 "Y" in the API request with your inverter code that you see from the Peimar monitoring app on symply from the inverte wifi name.
 
 This flow is just a simple example with a battery SoC indicator and a Sum of two strings power but you can take whatever parameter you need from the API payload.
-The dashboard refresh is triggered by a button, it is done in this way to not be banned from the monitoring panel for too many requests but also a peiodical check is an option.
+The dashboard refresh is triggered by a button, it is done in this way to not be banned from the monitoring panel for too many requests but also a periodical check is an option.
