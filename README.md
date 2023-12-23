@@ -7,3 +7,4 @@ Then substitute the 10 "Y" in the API request with your inverter code that you s
 
 This flow is just a simple example with a battery SoC indicator and a Sum of two strings power but you can take whatever parameter you need from the API payload.
 The dashboard refresh is triggered by a button, it is done in this way to not be banned from the monitoring panel for too many requests but also a periodical check is an option.
+![image](https://github.com/lukebikes/PeimarNodeRED/assets/130980547/923c345b-d90d-4e11-b8cc-09af7ba672ff)
